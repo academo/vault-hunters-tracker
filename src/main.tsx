@@ -9,4 +9,7 @@ console.log('[ERWT] : Renderer execution started');
 const app = <Application />;
 
 // Render application in DOM
-createRoot(document.getElementById('app')).render(app);
+const appEl = document.getElementById('app');
+if (appEl) {
+  createRoot(appEl).render(app);
+}

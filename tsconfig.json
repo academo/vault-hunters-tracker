@@ -8,6 +8,7 @@
     "esModuleInterop": true,
     "noImplicitAny": true,
     "sourceMap": true,
+    "strictNullChecks": true,
     "baseUrl": ".",
     "outDir": "dist",
     "moduleResolution": "node",

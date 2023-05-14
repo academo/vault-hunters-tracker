@@ -4,7 +4,7 @@ type direction = 'east' | 'south' | 'west' | 'north';
 
 const MAX_SIZE = 40;
 
-export class Map {
+export class RoomsMapState {
   private roomMap = Array<Array<Room | undefined>>();
   currentX = 20;
   currentY = 20;
@@ -22,7 +22,38 @@ export class Map {
     this.roomMap[this.currentX][this.currentY] = current;
   }
 
-  getMap(): Array<Array<Room>> {
+  getBounderies() {
+    const matrix = this.roomMap;
+    let maxHorizontal = 0;
+    let maxVertical = 0;
+    // Check horizontal non-undefined values
+    for (let i = 0; i < matrix.length; i++) {
+      let count = 0;
+      for (let j = 0; j < matrix[i].length; j++) {
+        if (matrix[i][j] !== undefined) {
+          count++;
+        } else {
+          count = 0;
+        }
+        maxHorizontal = Math.max(maxHorizontal, count);
+      }
+    }
+    // Check vertical non-undefined values
+    for (let j = 0; j < matrix[0].length; j++) {
+      let count = 0;
+      for (let i = 0; i < matrix.length; i++) {
+        if (matrix[i][j] !== undefined) {
+          count++;
+        } else {
+          count = 0;
+        }
+        maxVertical = Math.max(maxVertical, count);
+      }
+    }
+    return { maxHorizontal, maxVertical };
+  }
+
+  getMap(): Array<Array<Room | undefined>> {
     return this.roomMap;
   }
 
@@ -66,7 +97,7 @@ export class Map {
   }
 }
 
-class Room {
+export class Room {
   id = uuidv4();
   flags: Array<string> = [];
   current = false;
