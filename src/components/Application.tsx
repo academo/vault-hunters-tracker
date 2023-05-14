@@ -18,6 +18,13 @@ const Application: React.FC = () => {
     console.log(roomsMap?.findBoundaries());
   };
 
+  const restartMap = () => {
+    if (window.confirm('Are you sure you want to restart?')) {
+      setRoomsMap(undefined);
+      setMoves(0);
+    }
+  };
+
   if (!roomsMap) {
     return (
       <div>
@@ -30,9 +37,10 @@ const Application: React.FC = () => {
 
   return (
     <div>
-      {roomsMap && <Navigate onNavigate={onNavigate} />}
-      {roomsMap && <RoomsMap roomsMap={roomsMap} />}
+      <Navigate onNavigate={onNavigate} />
+      <RoomsMap roomsMap={roomsMap} />
       {!!moves && <p>You moved {moves} times</p>}
+      <button onClick={restartMap}>Restart</button>
     </div>
   );
 };
