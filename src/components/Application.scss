@@ -22,11 +22,38 @@
   }
 }
 
+@keyframes moving-border {
+  0% {
+    background-color: red;
+  }
+  50% {
+    background-color: white;
+  }
+  100% {
+    background-color: red;
+  }
+}
+
+.navigate-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  button {
+    font-size: 2em;
+    margin: 10px;
+    padding: 7px 15px;
+  }
+}
+
 .room-current {
   animation: current-animation 4s infinite;
   display: block;
   width: 100%;
   height: 100%;
+}
+.room-current.room-portal {
+  border: 5px solid blue;
 }
 
 .room {
@@ -50,4 +77,59 @@
 
 .room-unexplored {
   display: none;
+}
+
+.room-portal-south {
+  position: relative;
+  overflow: hidden;
+}
+.room-portal-south::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background-color: red;
+  animation: moving-border 2s linear infinite;
+}
+
+.room-portal-north {
+  position: relative;
+  overflow: hidden;
+}
+.room-portal-north::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  animation: moving-border 2s linear infinite;
+}
+.room-portal-east {
+  position: relative;
+  overflow: hidden;
+}
+.room-portal-east::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 5px;
+  height: 100%;
+  animation: moving-border 2s linear infinite;
+}
+.room-portal-west {
+  position: relative;
+  overflow: hidden;
+}
+.room-portal-west::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  animation: moving-border 2s linear infinite;
 }

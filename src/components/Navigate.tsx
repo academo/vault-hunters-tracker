@@ -6,14 +6,7 @@ export function Navigate({
   onNavigate: (path: string) => void;
 }) {
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        width: '300px',
-      }}
-    >
+    <div className={'navigate-buttons'}>
       <button onClick={() => onNavigate('north')}>North</button>
       <div style={{ display: 'flex' }}>
         <button onClick={() => onNavigate('west')}>West</button>

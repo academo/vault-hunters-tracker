@@ -6,7 +6,9 @@ export function RoomCell({ room }: { room?: Room }) {
     <div
       className={`room ${room ? 'room-cell' : ''} ${
         room?.current ? 'room-current' : ''
-      } ${room?.portal ? 'room-portal' : ''}`}
+      } ${room?.portal ? 'room-portal' : ''}
+        ${room?.portal ? 'room-portal-' + room.portal : ''}
+      `}
     ></div>
   );
 }

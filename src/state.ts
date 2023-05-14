@@ -11,7 +11,7 @@ export class RoomsMapState {
   current: Room;
   count = 0;
 
-  constructor() {
+  constructor(startDirection: ExploreDirection) {
     for (let i = 0; i < MAX_SIZE; i++) {
       this.roomMap.push(Array(MAX_SIZE).fill(undefined));
     }
@@ -21,7 +21,7 @@ export class RoomsMapState {
       cordY: this.currentY,
       id: uuidv4(),
       current: true,
-      portal: true,
+      portal: startDirection,
     };
     current.current = true;
     this.current = current;
@@ -114,5 +114,5 @@ export type Room = {
   cordX: number;
   cordY: number;
   flags?: Array<string>;
-  portal?: boolean;
+  portal?: ExploreDirection;
 };

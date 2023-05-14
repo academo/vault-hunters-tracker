@@ -1,5 +1,5 @@
 import { ExploreDirection, RoomsMapState } from '@src/state';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './Application.scss';
 import { Navigate } from './Navigate';
 import { RoomsMap } from './RoomsMap';
@@ -8,12 +8,8 @@ const Application: React.FC = () => {
   const [roomsMap, setRoomsMap] = useState<RoomsMapState>();
   const [moves, setMoves] = useState(0);
 
-  useEffect(() => {
-    setRoomsMap(new RoomsMapState());
-  }, []);
-
-  const startVaultMap = () => {
-    setRoomsMap(new RoomsMapState());
+  const startVaultMap = (path: ExploreDirection) => {
+    setRoomsMap(new RoomsMapState(path));
   };
 
   const onNavigate = (path: ExploreDirection) => {
@@ -22,12 +18,21 @@ const Application: React.FC = () => {
     console.log(roomsMap?.findBoundaries());
   };
 
+  if (!roomsMap) {
+    return (
+      <div>
+        <h1>Welcome to Vault Hunters Tracker</h1>
+        <p>Select the starting direction of your portal</p>
+        <Navigate onNavigate={startVaultMap} />
+      </div>
+    );
+  }
+
   return (
     <div>
       {roomsMap && <Navigate onNavigate={onNavigate} />}
       {roomsMap && <RoomsMap roomsMap={roomsMap} />}
-      {!roomsMap && <button onClick={startVaultMap}>Start</button>}
-      {!!moves && <h1>You moved {moves} times</h1>}
+      {!!moves && <p>You moved {moves} times</p>}
     </div>
   );
 };
